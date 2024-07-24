@@ -43,3 +43,14 @@ manually using the following command:
 
 The project uses environment variables defined in a ``.env`` file. 
 You can use the example file ``.env.example`` to generate your own file that will contain the environment variables.
+
+
+
+# CONTENEDOR DOCKER
+Dockerfile
+
+docker build -t fis-chatbot-api-main .
+docker run -p 3000:3000 fis-chatbot-api-main
+
+
+pyenv install 3.11.4
