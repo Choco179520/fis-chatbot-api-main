@@ -1,0 +1,129 @@
+swagger: "2.0"
+info:
+  version: "1.1"
+  title: FIS Chatbot API REST
+  description: A rules-based chatbot API REST that answers frequently asked questions from FIS students.
+
+tags:
+  - name: api
+    description: Chatbot Core Operations
+  - name: images
+    description: Resource Obtaining
+
+paths:
+  /images/{image_name}:
+    get:
+      tags:
+        - images
+      summary: Get a specific image
+      description: Look for a specific image in the 'static/images' folder.
+      produces:
+        - image/jpeg
+        - image/png
+      parameters:
+        - name: image_name
+          in: path
+          type: string
+          required: true
+          description: Image name
+      responses:
+        200:
+          description: Image found
+        404:
+          description: Image not found
+
+  /api/actions:
+    post:
+      tags:
+        - api
+      summary: Get a response based on the id of a specific action
+      description: Searches for a response based on the id of an action.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              action:
+                type: integer
+                description: Action ID
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: object
+            example:
+              - type: text
+                content: Text message content
+              - type: action
+                action: Action ID of the action message
+                name: Action name
+              - type: link
+                path: URL path of the link message
+                name: Link name
+              - type: image
+                path: URL path of the image message
+                alt: Image name
+
+  /api/messages:
+    post:
+      tags:
+        - api
+      summary: Get a response based on the message sent by the user
+      description: Searches for a response and provides an associated response based on the message entered by the user and recognition of their intent.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              user_message:
+                type: string
+                description: User message content
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: object
+            example:
+              - type: text
+                content: Text message content
+              - type: action
+                action: Action ID of the action message
+                name: Action name
+              - type: link
+                path: URL path of the link message
+                name: Link name
+              - type: image
+                path: URL path of the image message
+                alt: Image name
+
+  /api/status:
+    get:
+      tags:
+        - api
+      summary: Returns a message when the server is active
+      description: When the server has started correctly it allows you to obtain a message indicating the status of the server.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Server started successfully
+          schema:
+            type: object
+            example:
+              - status: up
