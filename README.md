@@ -54,3 +54,6 @@ docker run -p 3000:3000 fis-chatbot-api-main
 
 
 pyenv install 3.11.4
+
+Si da error al instalar correr aparte el siguiente comando
+pip install torch==2.1.0 --index-url https://pypi.org/simple
