@@ -23,7 +23,7 @@ module.exports = {
             UTTERANCES_LIMIT:'5',
             BATCH_SIZE:'16',
             EPOCHS:'12',
-            DB_URL: 'http://localhost:3000/api'
+            DB_URL: 'https://backend-chatbot-fis.hoptech.dev/chatbot-persistence/api'
           }
       },
     ],
